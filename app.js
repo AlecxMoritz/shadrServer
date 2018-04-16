@@ -19,7 +19,7 @@ const shade = require('./controllers/shadecontroller')
 
 // middleware
 app.use(bodyParser.json())
-sequelize.sync({Force: true});
+sequelize.sync();
 app.use(require('./middleware/headers'))
 
 //{Force: true}

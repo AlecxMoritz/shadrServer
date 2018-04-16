@@ -17,9 +17,23 @@ module.exports = function(sequelize, DataTypes) {
         // total shades posted
         dislikesgiven: DataTypes.INTEGER,
         // total dislikes given by a user
-        usertype: DataTypes.STRING,
+        usertype: {
+            type: DataTypes.STRING,
+            defaultValue: "user"
+        },
         // user, admin, or mod
-        usersymbol: DataTypes.STRING
+        usersymbol: {
+            type: DataTypes.STRING,
+            defaultValue: ">"
+        }
+        
+        // ,  breaks application // put in later
+        // userrank: {
+        //     type: DataTypes.STRING,
+        //     defaultValue: "shady"
+        // }
+
+
         // symbol in front of user's shades
     })
 }
