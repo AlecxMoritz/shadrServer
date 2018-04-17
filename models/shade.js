@@ -1,4 +1,4 @@
-module.exports = function(req, res, DataTypes) {
+module.exports = function(sequelize, DataTypes) {
     return sequelize.define('shade', {
         ownerid: DataTypes.INTEGER,
         // owners id

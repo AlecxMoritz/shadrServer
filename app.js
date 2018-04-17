@@ -16,6 +16,7 @@ var bodyParser = require('body-parser');
 const test = require('./controllers/testcontroller');
 const user = require('./controllers/usercontroller')
 const shade = require('./controllers/shadecontroller')
+const advuser = require('./controllers/advancedusercontroller')
 
 // middleware
 app.use(bodyParser.json())
@@ -29,13 +30,13 @@ app.use('/test', test)
 app.use('/user', user)
 
 // will move later
-app.use('/shade', shade)                
 
 // validation
-// need a validate sesision
+app.use(require('./middleware/validate-session'))
 
 // auth'd routes
-// put shades here after tests            **
+app.use('/shade', shade)
+app.use('/advuser', advuser)            
 
 // listener
 app.listen(8000, function() {

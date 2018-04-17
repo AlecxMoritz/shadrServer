@@ -112,4 +112,30 @@ router.delete('/delete', function(res, req) {
     res.send('Delete user point test successful')
 })
 
+// get user info
+////////////////
+// 
+
+router.get('/me', function(res, req) {
+    let userid = req.user.id
+
+    User.findOne({
+        where: {
+            id: userid
+        }
+    })
+    .then(
+        function meSuccess(user){
+            console.log("Found user")
+            res.json({
+                user
+            })
+        },
+        function meError(err) {
+            console.log("An error occured")
+            res.send(500, err.message)
+        }
+    )
+})
+
 module.exports = router;
