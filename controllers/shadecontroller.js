@@ -75,8 +75,29 @@ router.get('/all', function(req, res) {
 
 // add :id later
 
-router.put('/update/', function(req, res) {
-    res.send("Update shade point test successful")
+router.put('/update/:id', function(req, res) {
+    var shadeid = req.params.id;
+    var newText = req.body.shade.text
+
+    Shade.update({
+        text: newText
+    },
+    {where: {
+        id: shadeid
+    }
+    }).then(
+        function updateSuccess(Shade) {
+            console.log("Shade updated")
+            res.json({
+                newText
+            });
+            console.log(newText)
+        },
+        function updateError(err) {
+            console.log("shade update error" + err)
+            res.send(500, err.message)
+        }
+    ) 
 })
 
 // delete
@@ -103,4 +124,23 @@ router.delete('/delete/:id', function(req, res) {
     )
 })
 
+// get mine
+router.get('/mine', function(req, res) {
+    ownerId = req.user.id
+    Shade.findAll({ 
+        limit: 50,
+        order: [
+            ['id', 'DESC']
+        ],
+        where: { ownerid: ownerId }
+    })
+    .then(
+        function getShadesSuccess(shades) {
+            res.json(shades);
+        },
+        function getShadesError(err){
+            res.send(500, err.message);
+        }
+    )
+})
 module.exports = router;
