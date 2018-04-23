@@ -1,16 +1,16 @@
-module.exports = function(req, res, DataTypes) {
-    return sequelize.define('dislke', {
-        dislikerid: DataTypes.STRING,  
-        // id of user who disliked it
+module.exports = function(sequelize, DataTypes) {
+    return sequelize.define('dislike', {
+        dislikerid: DataTypes.INTEGER,  
+        // id of user who disliked it   // recieved from token
         text: DataTypes.STRING,  
-        // shade text 
+        // shade text  // recieve from post
         totaldislikes: DataTypes.INTEGER,   
         // dislike counter
         ownerimg: DataTypes.STRING,  
         // actual owners img
         ownerid: DataTypes.STRING,  
-        //actual owners id
+        //actual owners id // recieved from post
         ownerscreenname: DataTypes.STRING, 
-        // the actual owners screen name
+        // the actual owners screen name  // recieved from post
     })
 }
