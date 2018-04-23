@@ -18,6 +18,7 @@ const user = require('./controllers/usercontroller')
 const shade = require('./controllers/shadecontroller')
 const advuser = require('./controllers/advancedusercontroller')
 
+
 // middleware
 app.use(bodyParser.json())
 sequelize.sync();
@@ -36,7 +37,8 @@ app.use(require('./middleware/validate-session'))
 
 // auth'd routes
 app.use('/shade', shade)
-app.use('/advuser', advuser)            
+app.use('/advuser', advuser)     
+    
 
 // listener
 app.listen(8000, function() {
