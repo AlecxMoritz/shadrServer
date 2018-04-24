@@ -19,7 +19,7 @@ router.post('/new', function(req, res) {
         dislikerid: dislikerid,
         text: text,
         ownerid: ownerid,
-        ownderscreenname: ownerscreenname
+        ownerscreenname: ownerscreenname
     })
     .then(
         function dislikeSuccess(dislike) {
@@ -53,5 +53,25 @@ router.get('/mine', function(req, res) {
     )
 })
 
+router.delete('/delete/:id', function(req, res) {
+    let dislikerid = req.user.id;
+    let dislikeid = req.params.id;
+    
+    Dislike.destroy({
+        where: {
+            id: dislikeid,
+            dislikerid: dislikerid
+        }
+    }).then(
+        function deleteDislikeSuccess(dislike) {
+            res.send("Dislike removed");
+            console.log("Dislike removed")
+        },
+        function deleteDislikeError(err) {
+            console.log("Removal failed")
+            res.send("Cannot remove this Dislike")
+        }
+    )
+})
 
 module.exports = router;
